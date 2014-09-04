@@ -7,4 +7,7 @@ tmp/
 *.zip
 *.log
 *.substvars
-
+storm-deb-packaging/build
+storm-deb-packaging/debian/apache-storm
+storm-deb-packaging/orig
+storm-deb-packaging/debian/files
