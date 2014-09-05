@@ -17,27 +17,29 @@ export DH_VERBOSE=1
 export DH_OPTIONS
 
 # Prepare sources
-export ORIG_PATH=apache-storm-0.9.2-incubating
+#export ORIG_PATH=apache-storm-0.9.2-incubating
+export ORIG_PATH=apache-storm-0.9.3-incubating-SNAPSHOT
 
 override_dh_auto_build:
 
-	# Download and use zip from apache  
-	wget -c http://www.eu.apache.org/dist/incubator/storm/apache-storm-0.9.2-incubating/apache-storm-0.9.2-incubating.zip
+	# Ensure apache zip is downloaded to project root `./downloads`
+	# wget -c -P ../downloads http://www.eu.apache.org/dist/incubator/storm/apache-storm-0.9.2-incubating/apache-storm-0.9.2-incubating.zip
+
+	# If snapshot version should be used - comment the line above, put the zip to `../downloads` and change ORIG_PATH
+
+	# Unpack required zip contents to orig folder.
 	rm -rf ${ORIG_PATH}
-	unzip ${ORIG_PATH}.zip
 	rm -rf orig
+
+	unzip ../downloads/${ORIG_PATH}.zip
 	mkdir orig
 	mv ${ORIG_PATH}/* orig
-	rm -rf ${ORIG_PATH}
 
-	# Alternative - comment section above and put the sources manually to orig folder.
-  # ...
+	rm -rf ${ORIG_PATH}
 
 	touch build
 
 override_dh_auto_clean:
-  # clean unpacked sources
-	@- $(RM) -r orig
 	@- $(RM) build
 	@- $(RM) -r target
 
